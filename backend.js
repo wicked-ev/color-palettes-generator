@@ -3,13 +3,11 @@ let Reloadbuttonlist = [];
 let lockButtonlist = [];
 let HEXCODESlist = [];
 let favoriteColorslist = [];
-console.log("hello world")
 window.addEventListener("DOMContentLoaded", () =>{
     console.log("DOMContentLoaded")
     const Cards = document.querySelectorAll('.cards');
     Cards.forEach((Cards) =>
     {
-        console.log('are we here ? ')
         CardsIDlist.push(Cards.id);
         tmpchildlist = document.getElementById(Cards.id).children
         for (child of tmpchildlist){
@@ -24,24 +22,63 @@ window.addEventListener("DOMContentLoaded", () =>{
             }
         }
     })
-    console.log(Reloadbuttonlist);
+    RandomColors();
     reloadEventsHandler(Reloadbuttonlist);
     favoriteEventsHandler();
-
+    
 });
+
+
 
 function favoriteEventsHandler() {
     let likebuttonlist = document.getElementById("heart")
     likebuttonlist.addEventListener("click", () => {
         favoriteColorslist.push(GetinhtmlHexCode());
         console.log(favoriteColorslist);
-        
+        CreateNewFav(favoriteColorslist.length -1);
+        likebuttonlist.src = "./asset/img/liked.png";
     })
 }
 
-function CreateNewFav(){
+function CreateNewFav(id){
+
+    let Favlist = document.getElementById("favlist");
     let newFav = document.createElement("div");
-    newFav.id = ''
+    newFav.id = 'fav'+id.toString();
+    newFav.classList.add('favpalette');
+    let cards = document.querySelectorAll(".cards");
+    let listofcolors = getallcolorHexCode(cards);
+    for (let i = 0; i < listofcolors.length ; i++) {
+        let color = document.createElement("div");
+        color.id = "color"+i.toString();
+        color.classList.add("color");
+        color.style.background = listofcolors[i];
+        newFav.appendChild(color);
+    }
+    let deletbutton = document.createElement("button");
+    deletbutton.id = "bdelete"+id.toString();
+    deletbutton.classList.add("delete");
+    deletbutton.addEventListener("click",() =>{
+        Favlist.removeChild(newFav);
+    });
+    let deleteIcon = document.createElement("img");
+    deleteIcon.classList.add("dicon");
+    deleteIcon.src = "/asset/img/delete.png";
+    deletbutton.appendChild(deleteIcon);
+    newFav.appendChild(deletbutton);
+    Favlist.appendChild(newFav);
+    newFav.addEventListener("click",() =>{
+        let list = getallcolorHexCode(newFav.childNodes);
+        console.log(list);
+        setallcolors(list);
+    });
+}
+
+function setallcolors(list){
+    let cards = document.querySelectorAll(".cards");
+    for(let i = 0; i < list.length; i++){
+        cards[i].style.backgroundColor = list[i];
+    }
 }
 
 function GetinhtmlHexCode(){
@@ -50,6 +87,39 @@ function GetinhtmlHexCode(){
         list.push(document.getElementById(Code).innerHTML)
     }
     return list
+}
+
+function rgbToHex(rgb) {
+    const components = rgb.match(/\d+/g); // Extract RGB components
+    const hex = components.map(component => {
+        const hexValue = parseInt(component).toString(16);
+        return hexValue.length === 1 ? '0' + hexValue : hexValue;
+    });
+    return '#' + hex.join('');
+}
+
+function getallcolorHexCode(query){
+    let list = [];
+    // let cards = document.querySelectorAll('.cards');
+    query.forEach(query => {
+        let style = window.getComputedStyle(query);
+        let bgcolor = style.backgroundColor;
+        if(bgcolor.includes('rgba')){
+            list.push(rgbTohex(bgcolor));
+        }
+        else{
+            list.push(bgcolor);
+        }
+    })
+    return list
+}
+
+function RandomColors(){
+    let cards = document.querySelectorAll('.cards');
+    cards.forEach(cards => {
+        cards.style.backgroundColor = RandomHexColor();
+        cards.children[2].innerHTML = RandomHexColor();
+    });
 }
 
 function reloadEventsHandler(buttonlist){ 
@@ -84,3 +154,4 @@ function RandomHexColor(){
     RHcolor = Rcolor.toString(16); 
     return "#"+RHcolor
 }
+
