@@ -15,6 +15,7 @@ html, body{
     display: flex;
     flex-direction: column;
     background-color:#7E52A0;
+    border-radius: 0px 0px 20px 0px;
     height: 100%;
     width: 18vh;
 }
@@ -32,14 +33,18 @@ Main{
     width: 50%;
     border-radius: 20px;
     margin: 0;
+    border-top: 2px solid black;;
+
 }
 
 .Menu{
     display: flex;
-    justify-content: flex-end;
-    background-color: aquamarine;
+    justify-content: center;
+    background-color: #29274C;
     height: 290%;
-    border-radius: 20px 20px 0px 0px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 15px 15px 0px 0px;
 }
 .favorite{
     display: flex;
@@ -47,8 +52,10 @@ Main{
     justify-content: center;
     background-color: #29274C;
     height: 50%;
+    border-bottom: 2px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
     border-radius: 0px 0px 20px 20px;
-    border-top: 2px solid black;
 }
 .plus {
     border-radius: 0px 20px 0px 0px ;
@@ -61,21 +68,34 @@ Main{
     width: 10vh;
 }  
 .dbutton{
-    margin-right: 10%;
+    margin-right: 2%;
+}
+.Rbutton{
+    margin-right: 8%;
+}
+.Rbutton button{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI';
+    font-size: medium;
+    background-color: #4b43e6;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 30px;
 }
 .dbutton button{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI';
     font-size: medium;
+    background-color: #4b43e6;
+    border: 2px solid black;
+    border-radius: 10px;
     height: 30px;
 }
 .cards{
     display: flex;
     flex-direction: column;
     justify-content: end;
-    align-items: center ;
-    background-color: blueviolet;
+    align-items: center;
     width: 12%;
-    border-left: 4px solid black;
+
 }
 .heartimg{
     height: 50px;
@@ -104,7 +124,7 @@ Main{
 }
 .color{
     background-color: tomato;
-    border-right: 1px solid black;
+    border-right: 1px solid gray;
     height: 20px;
     width: 15px;
 }
@@ -120,4 +140,27 @@ Main{
 .dicon{
     height: 15px;
     width:15px;
+}
+.export{
+    display: flex;
+    background-color: #7E52A0;
+    justify-content: flex-start;
+    height: 50px;
+    width: 350px;
+}
+.Cexport{
+    height: 50px;
+    width: 50px;
+}
+footer {
+    background-color: #29274C;
+    margin: 0;
+    height: 10%;
+}
+#C1{
+    border-radius: 0px 0px 0px 10px;
+}
+
+#C7{
+    border-radius: 0px 0px 10px 0px;
 }
